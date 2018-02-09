@@ -72,7 +72,7 @@ def put_restricted(table):
 def upgrade(table, row, col):
 	if row < 0 or col < 0:
 		return 
-	
+		
 	table[row][col][1:] = [0 for i in range(9)]
 	
 	num = table[row][col][0]
@@ -83,9 +83,9 @@ def upgrade(table, row, col):
 	for j in range(9):
 		table[row][j][num] = 0
 	
-	sqX1 = (row%3) * 3
+	sqX1 = int(row/3)*3
 	sqX2 = sqX1 + 3
-	sqY1 = int(col/3)
+	sqY1 = int(col/3)*3
 	sqY2 = sqY1 + 3
 	
 	for a in range(sqX1, sqX2):
@@ -99,6 +99,15 @@ def print_table(table):
 			this_row += str(col[0]) + ","
 		print(this_row)
 
+def print_full_table(table):
+	for i in range(9):
+		for j in range(9):
+			if table[i][j][0] == 0:
+				this_row = "({0:d}, {1:d}): ".format(i, j)
+				for num in range(1, 10):
+					if table[i][j][num]:
+						this_row += "{0:d} ".format(num)
+				print(this_row)
 
 for i in range(9):
 	table.append(list(map(int, input().split(','))))
@@ -121,6 +130,7 @@ while True:
 	function calls for arrays are by reference.
 	map function is good :))
 	map is not subscriptable
+	pdb debbuger
 	python is much easier than C :)
 '''
 
