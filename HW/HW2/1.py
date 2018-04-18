@@ -36,7 +36,7 @@ table = [[Cell() for i in range(m)] for j in range(n)]
 
 for i in range(n):
 	currentRow = input()
-	for j in range(len(currentRow)):
+	for j in range(m):
 		table[i][j].content = currentRow[j]
 	
 for row in table:
@@ -71,17 +71,6 @@ for row in table:
 			H = Heap()
 		
 		cell.maxColExpand = cell.colAfter * H.min()
-
-for j in range(m):
-	rowCount = 0
-	for i in range(n-1, -1, -1):
-		cell = table[i][j]
-		if cell.content == '.':
-			rowCount = rowCount + 1
-		else:
-			rowCount = 0
-		
-		cell.rowAfter = rowCount
 
 for j in range(m):
 	H = Heap()

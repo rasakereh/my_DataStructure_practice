@@ -9,21 +9,6 @@ def LG(n):
 	
 	return a
 
-'''class Stack:
-	S = [0] * 10000
-	sp = 0
-	
-	def push(self, value):
-		S[self.sp] = value
-		self.sp += 1
-	
-	def pop(self):
-		self.sp -= 1
-		return S[self.sp]
-	
-	def isEmpty(self):
-		return self.sp == 0
-'''
 class Node:
 	value = 0
 	
@@ -36,7 +21,7 @@ class Node:
 		self.value = value
 
 class Heap:
-	H = [0] * 11000
+	H = [0] * 15000
 	size = 0
 	
 	inorder = []
@@ -53,32 +38,18 @@ class Heap:
 	
 	def inorderTraverse(self):
 		h = LG(self.size+1)		#height of Heap
-		self.inorder = [0] * (1 << h)
+		n = 1 << h
+		self.inorder = [0] * n
 		
 		for a in range(1, h+1):
 			for k in range(1 << (h-a)):
-				#print("A[" + str((k << a) + (1 << (a-1))) + "] = " + str((1 << (h-a)) + k))
-				self.inorder[(k << a) + (1 << (a-1))] = self.H[(1 << (h-a)) + k]
+				self.inorder[min(n-1, (k << a) + (1 << (a-1)))] = self.H[min(11000, (1 << (h-a)) + k)]
+		
 		i = 0
-		for j in range(len(self.inorder)):
+		for j in range(n):
 			if self.inorder[j] != 0:
 				self.inorder[i] = self.inorder[j]
 				i += 1
-		
-		self.inorder = self.inorder[:i]
-		
-	'''def inorderTraverse(self, index = 1):
-		S = Stack()
-		S.push(index)
-		
-		while not S.isEmpty():
-			curIndex = S.pop()
-			S.push(index << 1)
-			
-		self.inorderTraverse(index << 1)
-		self.inorder += [self.H[index]]
-		self.inorderTraverse((index << 1) + 1)'''
-			
 
 n = int(input())
 
